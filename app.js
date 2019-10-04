@@ -32,7 +32,7 @@ const  users= [
         ]
 const routeUser = require('./app/routes/route.user');
 app.use('/api/v1',routeUser)
-app.get('/',(req,res,next)=>{
+app.get('/user',(req,res,next)=>{
     res.render('index',{
         name:"lamnn8"
     })
@@ -43,9 +43,10 @@ app.get('/user',(req,res,next)=>{
     })
 })
 app.get('/users/search',(req,res,next)=>{
-    const q = req.query.p ;
+    const q = req.query ;
+    console.log(q.q)
     const dataUser = users.filter(function(user){
-        return user.name.indexOf(q) !== -1
+        return user.name.indexOf(q.q) !== -1
     })
     res.render('./users/user',{
         users:dataUser
