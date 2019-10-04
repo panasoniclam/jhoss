@@ -16,12 +16,41 @@ mongoose.connect(
     },
     ()=>console.log(`connect mongodb ${process.env.DATABASE_URL}`)
 )
+//config pig
+app.set('view engine','pug')
+app.set('views','./views')
 
 //route
-
+const  users= [
+            { id:"1",
+            name:'lamnn'
+            },
+            {
+                id:"2",
+                name:'thangtm'
+            }
+        ]
 const routeUser = require('./app/routes/route.user');
 app.use('/api/v1',routeUser)
-
+app.get('/',(req,res,next)=>{
+    res.render('index',{
+        name:"lamnn8"
+    })
+})
+app.get('/user',(req,res,next)=>{
+    res.render('./users/user',{
+       users:users
+    })
+})
+app.get('/users/search',(req,res,next)=>{
+    const q = req.query.p ;
+    const dataUser = users.filter(function(user){
+        return user.name.indexOf(q) !== -1
+    })
+    res.render('./users/user',{
+        users:dataUser
+     })
+})
 app.use((req,res,next)=>{
     const err = new Error('not found') ;
     err.status = 404 ;

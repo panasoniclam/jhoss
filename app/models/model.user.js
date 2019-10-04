@@ -15,7 +15,6 @@ const userChema = new  Schema({
         required:true
     }
 })
-
 userChema.pre('save',(next)=>{
     const user  = this ;
     bcrypt.hash(user.hash,stage.satingRoute,(err,hash)=>{
