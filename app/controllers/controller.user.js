@@ -23,6 +23,7 @@ module.exports = {
                 })
             }
       })
+     
     },
     login: async (req,res,next)=>{
        if(MissingParam.body(req,res,'username'))  return false ;
@@ -34,6 +35,12 @@ module.exports = {
                const token  = jwt.sign()
            })
        })
+    },
+    findall:async (req,res,next)=>{
+       User.findOne({username:'lamnn8'})
+        .then(data=> data.json())
+        .then(user=> res.status(200).send({
+            user
+        }))
     }
-    
 }

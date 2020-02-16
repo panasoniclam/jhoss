@@ -1,0 +1,8 @@
+h1 create user
+form(action="/api/v1/users/create",method="POST")
+    label name
+    input(type="text",name="username")
+    label password
+    input(type="password",name="password")
+    button create
+a(href="/api/v1/user") exit
